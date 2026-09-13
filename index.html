@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Cartel Pélicans</title>
+<meta name="description" content="Cartel Pélicans — Bandcamp, SoundCloud, Instagram, contact.">
+<meta property="og:title" content="Cartel Pélicans">
+<meta property="og:description" content="Bandcamp, SoundCloud, Instagram, contact.">
+<meta property="og:image" content="cover.jpg">
+<meta property="og:type" content="music.band">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EFC6C5">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#EFC6C5;
+  --ink:#17090B;
+  --muted:#8E3B41;
+  --rule:#D49A9A;
+  --accent:#B8202E;
+  --shade:rgba(23,9,11,.055);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#190709; --ink:#F0D2D0; --muted:#BE7A7E;
+    --rule:#48161C; --accent:#E4515E; --shade:rgba(255,255,255,.05);
+  }
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Archivo,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px; line-height:1.5;
+  display:flex; justify-content:center;
+  padding:clamp(16px,5vh,56px) 16px 44px;
+}
+
+.sheet{width:100%; max-width:460px}
+
+.sr-only{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+.cover{display:block; width:100%; aspect-ratio:1/1; object-fit:cover}
+
+.links{margin:22px 0 0; border-top:1px solid var(--rule)}
+.row{
+  display:flex; align-items:baseline; gap:14px;
+  padding:17px 14px 17px 13px;
+  border-bottom:1px solid var(--rule); border-left:2px solid transparent;
+  color:inherit; text-decoration:none;
+  transition:background .12s ease, border-color .12s ease, padding-left .12s ease;
+}
+.row:hover,.row:focus-visible{
+  background:var(--shade); border-left-color:var(--accent);
+  padding-left:19px; outline:none;
+}
+.row:focus-visible{box-shadow:inset 0 0 0 2px var(--accent)}
+.label{flex:1 1 auto; font-weight:600; font-stretch:112%; letter-spacing:-.012em; font-size:17px}
+.host{
+  flex:0 0 auto; font-size:12.5px; font-weight:400; font-stretch:78%;
+  color:var(--muted); letter-spacing:.015em;
+}
+.row:hover .host,.row:focus-visible .host{color:var(--accent)}
+
+.foot{margin-top:18px}
+.copy{
+  font:inherit; font-size:12.5px; font-stretch:78%; letter-spacing:.015em;
+  color:var(--muted); background:none; cursor:pointer;
+  border:1px solid var(--rule); padding:8px 13px;
+  transition:color .12s ease, border-color .12s ease;
+}
+.copy:hover,.copy:focus-visible{color:var(--accent); border-color:var(--accent); outline:none}
+
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</head>
+
+<body>
+<main class="sheet">
+  <h1 class="sr-only">Cartel Pélicans</h1>
+
+  <picture>
+    <source srcset="cover.webp" type="image/webp">
+    <img class="cover" src="cover.jpg" alt="Cartel Pélicans" width="900" height="900">
+  </picture>
+
+  <nav class="links" id="links"></nav>
+
+  <div class="foot">
+    <button class="copy" id="copy" type="button">Copier le lien</button>
+  </div>
+</main>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   Les liens se modifient ici, et nulle part ailleurs.
+   ═══════════════════════════════════════════════════════ */
+const LINKS = [
+  { label: "Bandcamp",   url: "https://cartelpelicans.bandcamp.com/album/cartel-p-licans" },
+  { label: "SoundCloud", url: "https://soundcloud.com/cartel-pelicans/sets/cartel-pelicans" },
+  { label: "Instagram",  url: "https://www.instagram.com/cartelpelicans.band" },
+  { label: "Contact",    url: "mailto:cartelpelicansband@gmail.com" },
+];
+/* ═══════════════════════════════════════════════════════ */
+
+const hostOf = (url) => url.startsWith("mailto:")
+  ? url.slice(7)
+  : new URL(url).hostname.replace(/^www\./, "");
+
+document.getElementById("links").innerHTML = LINKS.map(l => `
+  <a class="row" href="${l.url}"${l.url.startsWith("mailto:") ? "" : ' rel="me noopener"'}>
+    <span class="label">${l.label}</span>
+    <span class="host">${hostOf(l.url)}</span>
+  </a>`).join("");
+
+const btn = document.getElementById("copy");
+btn.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(location.href);
+    btn.textContent = "Lien copié";
+  } catch {
+    btn.textContent = location.href;
+  }
+  setTimeout(() => { btn.textContent = "Copier le lien"; }, 2000);
+});
+</script>
+</body>
+</html>
