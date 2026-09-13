@@ -10,14 +10,14 @@
 <meta property="og:description" content="Bandcamp, SoundCloud, Instagram, contact.">
 <meta property="og:image" content="cover.jpg">
 <meta property="og:type" content="music.band">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#EFC6C5">
 <link rel="icon" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Grenze+Gotisch:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -42,19 +42,28 @@ body{
   font-family:Archivo,system-ui,-apple-system,"Segoe UI",sans-serif;
   font-size:16px; line-height:1.5;
   display:flex; justify-content:center;
-  padding:clamp(16px,5vh,56px) 16px 44px;
+  padding:clamp(28px,8vh,72px) 16px 44px;
 }
 
-.sheet{width:100%; max-width:460px}
+.sheet{width:100%; max-width:440px}
 
-.sr-only{
-  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+/* ── entête ── */
+.head{display:flex; flex-direction:column; align-items:center; text-align:center}
+
+.avatar{
+  width:clamp(150px,44vw,190px); aspect-ratio:1/1; border-radius:50%;
+  object-fit:cover; display:block;
+  border:1px solid var(--rule);
 }
 
-.cover{display:block; width:100%; aspect-ratio:1/1; object-fit:cover}
+h1{
+  font-family:"Grenze Gotisch",Archivo,serif;
+  margin:18px 0 0; font-size:clamp(34px,10vw,44px); font-weight:600;
+  line-height:1; letter-spacing:.005em;
+}
 
-.links{margin:22px 0 0; border-top:1px solid var(--rule)}
+/* ── liens ── */
+.links{margin:30px 0 0; border-top:1px solid var(--rule)}
 .row{
   display:flex; align-items:baseline; gap:14px;
   padding:17px 14px 17px 13px;
@@ -74,9 +83,10 @@ body{
 }
 .row:hover .host,.row:focus-visible .host{color:var(--accent)}
 
-.foot{margin-top:18px}
+/* ── pied ── */
+.foot{margin-top:18px; text-align:center}
 .copy{
-  font:inherit; font-size:12.5px; font-stretch:78%; letter-spacing:.015em;
+  font-family:Archivo,sans-serif; font-size:12.5px; font-stretch:78%; letter-spacing:.015em;
   color:var(--muted); background:none; cursor:pointer;
   border:1px solid var(--rule); padding:8px 13px;
   transition:color .12s ease, border-color .12s ease;
@@ -89,12 +99,13 @@ body{
 
 <body>
 <main class="sheet">
-  <h1 class="sr-only">Cartel Pélicans</h1>
-
-  <picture>
-    <source srcset="cover.webp" type="image/webp">
-    <img class="cover" src="cover.jpg" alt="Cartel Pélicans" width="900" height="900">
-  </picture>
+  <header class="head">
+    <picture>
+      <source srcset="cover.webp" type="image/webp">
+      <img class="avatar" src="cover.jpg" alt="" width="600" height="600">
+    </picture>
+    <h1>Cartel Pélicans</h1>
+  </header>
 
   <nav class="links" id="links"></nav>
 
