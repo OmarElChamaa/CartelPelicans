@@ -17,7 +17,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Grenze+Gotisch:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -51,19 +51,18 @@ body{
 .head{display:flex; flex-direction:column; align-items:center; text-align:center}
 
 .avatar{
-  width:clamp(150px,44vw,190px); aspect-ratio:1/1; border-radius:50%;
+  width:clamp(70px,19vw,86px); aspect-ratio:1/1; border-radius:50%;
   object-fit:cover; display:block;
   border:1px solid var(--rule);
 }
 
 h1{
-  font-family:"Grenze Gotisch",Archivo,serif;
-  margin:18px 0 0; font-size:clamp(34px,10vw,44px); font-weight:600;
-  line-height:1; letter-spacing:.005em;
+  margin:16px 0 0; font-size:clamp(27px,7.5vw,34px); font-weight:600;
+  font-stretch:108%; letter-spacing:-.02em; line-height:1.05;
 }
 
 /* ── liens ── */
-.links{margin:30px 0 0; border-top:1px solid var(--rule)}
+.links{margin:26px 0 0; border-top:1px solid var(--rule)}
 .row{
   display:flex; align-items:baseline; gap:14px;
   padding:17px 14px 17px 13px;
@@ -83,16 +82,6 @@ h1{
 }
 .row:hover .host,.row:focus-visible .host{color:var(--accent)}
 
-/* ── pied ── */
-.foot{margin-top:18px; text-align:center}
-.copy{
-  font-family:Archivo,sans-serif; font-size:12.5px; font-stretch:78%; letter-spacing:.015em;
-  color:var(--muted); background:none; cursor:pointer;
-  border:1px solid var(--rule); padding:8px 13px;
-  transition:color .12s ease, border-color .12s ease;
-}
-.copy:hover,.copy:focus-visible{color:var(--accent); border-color:var(--accent); outline:none}
-
 @media (prefers-reduced-motion: reduce){*{transition:none !important}}
 </style>
 </head>
@@ -102,16 +91,12 @@ h1{
   <header class="head">
     <picture>
       <source srcset="cover.webp" type="image/webp">
-      <img class="avatar" src="cover.jpg" alt="" width="600" height="600">
+      <img class="avatar" src="cover.jpg" alt="" width="300" height="300">
     </picture>
     <h1>Cartel Pélicans</h1>
   </header>
 
   <nav class="links" id="links"></nav>
-
-  <div class="foot">
-    <button class="copy" id="copy" type="button">Copier le lien</button>
-  </div>
 </main>
 
 <script>
@@ -135,17 +120,6 @@ document.getElementById("links").innerHTML = LINKS.map(l => `
     <span class="label">${l.label}</span>
     <span class="host">${hostOf(l.url)}</span>
   </a>`).join("");
-
-const btn = document.getElementById("copy");
-btn.addEventListener("click", async () => {
-  try {
-    await navigator.clipboard.writeText(location.href);
-    btn.textContent = "Lien copié";
-  } catch {
-    btn.textContent = location.href;
-  }
-  setTimeout(() => { btn.textContent = "Copier le lien"; }, 2000);
-});
 </script>
 </body>
 </html>
